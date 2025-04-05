@@ -3,7 +3,7 @@ import re
 import discord
 from discord.ext import commands
 
-# Get the bot token from environment variables set in Railway
+# Get the bot token from environment variables
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 if not TOKEN:
