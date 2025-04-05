@@ -7,6 +7,8 @@ TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 if not TOKEN:
     raise ValueError("Bot token is missing! Make sure it's set in the environment variables.")
+else:
+    print(f"Bot Token: {TOKEN}")  # Debug line to check if the token is being accessed correctly
 
 intents = discord.Intents.default()
 intents.messages = True  
