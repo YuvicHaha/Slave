@@ -2,12 +2,13 @@ import os
 import re
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
+
+# Load environment variables from .env file (if present)
+load_dotenv()
 
 # Fetch the bot token from the environment variable
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
-
-print(f"DISCORD_BOT_TOKEN: {os.getenv('DISCORD_BOT_TOKEN')}")
-
 if not TOKEN:
     raise ValueError("Bot token is missing! Make sure it's set in Railway environment variables.")
 
