@@ -6,6 +6,9 @@ import re  # Added import for regular expressions
 # Retrieve the bot token directly from the environment variables
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
+# Debugging step: print the token value
+print(f"Bot token: {TOKEN}")  # This will show None if the token is missing or incorrectly set.
+
 # Set up bot intents
 intents = discord.Intents.default()
 intents.messages = True
