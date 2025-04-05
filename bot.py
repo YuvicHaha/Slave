@@ -3,7 +3,7 @@ import re
 import discord
 from discord.ext import commands
 
-# Get the bot token from environment variables
+# Fetch the bot token from the environment variable
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 print(f"DISCORD_BOT_TOKEN: {os.getenv('DISCORD_BOT_TOKEN')}")
@@ -13,10 +13,10 @@ if not TOKEN:
 
 # Set up bot intents
 intents = discord.Intents.default()
-intents.messages = True  # Enables message events
-intents.message_content = True  # Required for monitoring messages
-intents.guilds = True  # Required for kicking members
-intents.members = True  # Required to fetch member info
+intents.messages = True
+intents.message_content = True
+intents.guilds = True
+intents.members = True
 
 # Initialize the bot
 bot = commands.Bot(command_prefix='!', intents=intents)
