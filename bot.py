@@ -1,16 +1,15 @@
-import os
 import discord
-from discord.ext import commands
 import re
+from discord.ext import commands
+import os
+from dotenv import load_dotenv
 
-# Retrieve the bot token directly from the environment variables
-TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+# Load environment variables from .env file
+load_dotenv()
 
-# Ensure the bot token is available
-if not TOKEN:
-    raise ValueError("DISCORD_BOT_TOKEN is not set in the environment variables.")
+# Get the token from the environment variables
+DISCORD_TOKEN = os.getenv("DISCORD_TOKEN")
 
-# Set up bot intents
 intents = discord.Intents.default()
 intents.messages = True
 intents.message_content = True
@@ -18,7 +17,7 @@ intents.guilds = True
 intents.members = True
 
 # Initialize the bot
-ba = commands.Bot(command_prefix='!', intents=intents)
+bot = commands.Bot(command_prefix='!', intents=intents)
 
 # List of allowed domains
 ALLOWED_DOMAINS = {"example.com", "trustedsite.com"}
@@ -111,5 +110,4 @@ async def on_message(message):
 async def ping(ctx):
     await ctx.send('Pong!')
 
-# Run the bot with the token
-ba.run(TOKEN)
+bot.run(DISCORD_TOKEN)  # Use the token from the .env file
