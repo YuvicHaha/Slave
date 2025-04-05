@@ -1,6 +1,8 @@
 import os
 import discord
 from discord.ext import commands
+import re  # Added import for regular expressions
+
 # Retrieve the bot token directly from the environment variables
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
