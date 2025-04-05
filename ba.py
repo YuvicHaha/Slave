@@ -18,7 +18,7 @@ intents.guilds = True
 intents.members = True
 
 # Initialize the bot
-bat = commands.Bot(command_prefix='!', intents=intents)
+ba = commands.Bot(command_prefix='!', intents=intents)
 
 # List of allowed domains
 ALLOWED_DOMAINS = {"example.com", "trustedsite.com"}
@@ -112,4 +112,4 @@ async def ping(ctx):
     await ctx.send('Pong!')
 
 # Run the bot with the token
-bat.run(TOKEN)
+ba.run(TOKEN)
