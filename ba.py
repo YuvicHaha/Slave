@@ -1,16 +1,8 @@
 import os
-import re
 import discord
-from discord.ext import commands
-from dotenv import load_dotenv
 
-# Load environment variables from .env file (if present)
-load_dotenv()
-
-# Fetch the bot token from the environment variable
-TOKEN = os.getenv("TOK")
-if not TOKEN:
-    raise ValueError("Bot token is missing! Make sure it's set in Railway environment variables.")
+# Retrieve the bot token directly from the environment variables
+TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
 # Set up bot intents
 intents = discord.Intents.default()
