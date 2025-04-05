@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Fetch the bot token from the environment variable
-TOKEN = os.getenv("DISCORD_BOT_TOKEN")
+TOKEN = os.getenv("TOK")
 if not TOKEN:
     raise ValueError("Bot token is missing! Make sure it's set in Railway environment variables.")
 
