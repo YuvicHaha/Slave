@@ -1,13 +1,14 @@
 import os
 import discord
 from discord.ext import commands
-import re  # Added import for regular expressions
+import re
 
 # Retrieve the bot token directly from the environment variables
 TOKEN = os.getenv("DISCORD_BOT_TOKEN")
 
-# Debugging step: print the token value
-print(f"Bot token: {TOKEN}")  # This will show None if the token is missing or incorrectly set.
+# Ensure the bot token is available
+if not TOKEN:
+    raise ValueError("DISCORD_BOT_TOKEN is not set in the environment variables.")
 
 # Set up bot intents
 intents = discord.Intents.default()
@@ -17,7 +18,7 @@ intents.guilds = True
 intents.members = True
 
 # Initialize the bot
-bot = commands.Bot(command_prefix='!', intents=intents)
+bat = commands.Bot(command_prefix='!', intents=intents)
 
 # List of allowed domains
 ALLOWED_DOMAINS = {"example.com", "trustedsite.com"}
@@ -105,4 +106,10 @@ async def on_message(message):
     
     await bot.process_commands(message)  # Ensure commands still work
 
-bot.run(TOKEN)
+# Command to test the bot's response
+@bot.command()
+async def ping(ctx):
+    await ctx.send('Pong!')
+
+# Run the bot with the token
+bat.run(TOKEN)
