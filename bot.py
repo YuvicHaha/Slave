@@ -33,6 +33,9 @@ MONITORED_CHANNELS = {
     1348157548997509201
 }
 
+# Log channel ID where deleted messages will be sent
+LOG_CHANNEL_ID = 1358348081682321428
+
 # Regex pattern to detect links
 LINK_PATTERN = re.compile(r"https?://(?:www\.)?([\w.-]+)")
 
@@ -70,9 +73,21 @@ async def on_message(message):
             print(f"Unapproved links found: {unapproved_links}")  # Debug output
             
             try:
+                # Save deleted message details
+                deleted_message_info = f"🚨 **Deleted Message Log** 🚨\n" \
+                                       f"👤 **User:** {message.author} (ID: {message.author.id})\n" \
+                                       f"📢 **Channel:** {message.channel.mention}\n" \
+                                       f"📝 **Message:** {message.content}\n" \
+                                       f"❌ **Unapproved Links:** {', '.join(unapproved_links)}"
+
                 # Attempt to delete the message
                 await message.delete()
                 print(f"Message from {message.author} deleted.")  # Debug output
+
+                # Send deleted message info to the log channel
+                log_channel = bot.get_channel(LOG_CHANNEL_ID)
+                if log_channel:
+                    await log_channel.send(deleted_message_info)
 
                 # Initialize or increment warning count
                 user_id = message.author.id
