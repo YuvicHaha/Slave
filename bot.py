@@ -22,8 +22,8 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 # List of allowed domains
 ALLOWED_DOMAINS = {"example.com", "trustedsite.com"}
 
-# List of users allowed to send any links
-ALLOWED_USERS = {598460565387476992, 1272478153201422420, 1279868613628657860}  # Replace with actual Discord user IDs
+# Role name that allows sending links
+ALLOWED_ROLE_NAME = "link perms"  # Change this to match the actual role name
 
 # List of channel IDs to monitor
 MONITORED_CHANNELS = {
@@ -50,20 +50,15 @@ async def on_message(message):
     if message.author.bot:
         return
 
-    # Check if the bot can delete messages and kick members
-    if not message.guild.me.guild_permissions.manage_messages:
-        print(f"Bot cannot delete messages in the server.")  # Debug output
-
-    if not message.guild.me.guild_permissions.kick_members:
-        print(f"Bot cannot kick members.")  # Debug output
-
     # Check if the message is in one of the monitored channels
     if message.channel.id not in MONITORED_CHANNELS:
         return  # Ignore messages from other channels
 
-    if message.author.id in ALLOWED_USERS:
+    # Check if the user has the allowed role
+    role_names = {role.name.lower() for role in message.author.roles}
+    if ALLOWED_ROLE_NAME.lower() in role_names:
         await bot.process_commands(message)
-        return  # Skip link checks for allowed users
+        return  # Skip link checks for allowed roles
 
     # Check for links in the message content
     found_links = LINK_PATTERN.findall(message.content)
