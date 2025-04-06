@@ -20,7 +20,7 @@ intents.members = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 # List of allowed domains
-ALLOWED_DOMAINS = {"example.com", "trustedsite.com"}
+ALLOWED_DOMAINS = {"cdn.discordapp.com", "trustedsite.com"}
 
 # Role name that allows sending links
 ALLOWED_ROLE_NAME = "link perms"  # Change this to match the actual role name
